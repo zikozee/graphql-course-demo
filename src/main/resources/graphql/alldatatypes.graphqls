@@ -7,3 +7,28 @@ type Sample {
 
 
 }
+
+interface Animal{
+    legs: Int
+    hasFeather: Boolean
+    color: Color!
+}
+
+type Dog implements Animal {
+    legs: Int,
+    hasFeather: Boolean
+    color: Color!
+    isBark: Boolean
+}
+
+type Duck implements Animal {
+    legs: Int!
+    hasFeather: Boolean!
+    color: Color!
+    isQuack: Boolean!
+    wiggleButt: Boolean!
+}
+
+enum Color {
+  BROWN, TAN, DARK_BROWN, AMBER
+}

@@ -68,6 +68,12 @@
 
         <!-- INIT DEPENDENCIES END-->
 
+
+        <!-- EXTERNAL DEPENDENCIES START -->
+
+
+        <!-- EXTERNAL DEPENDENCIES END -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

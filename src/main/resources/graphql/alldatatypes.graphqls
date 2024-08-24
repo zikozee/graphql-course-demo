@@ -1,0 +1,9 @@
+type Sample {
+    id: ID!
+    name: String!
+    age: Int
+    height: Float
+    isTall: Boolean
+
+
+}

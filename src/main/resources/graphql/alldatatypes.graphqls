@@ -1,5 +1,5 @@
 type Sample {
-    id: ID!
+    id: ID! # use uuid
     name: String!
     age: Int
     height: Float
@@ -54,3 +54,49 @@ enum RoarIntensity {
 
 # a type that return two or more types
 union DogDuck = Dog | Duck | Lion
+
+
+type Address {
+    street: String!,
+    city: String!,
+    country: String!,
+    zipCode: Int!
+}
+
+input AddressInput {
+    street: String!,
+    city: String!,
+    country: String!,
+    zipCode: Int!
+}
+
+# input types
+input SampleInput {
+    name: String!
+    age: Int
+    height: Float
+    dateOfBirth: Date!
+    salary: Long
+    money: BigDecimal
+    noOfPencils: NonNegativeInt
+    currency: Currency
+    address: [AddressInput!] # Address input is mandatory but not it could be one or more
+}
+
+input FetchSampleInput {
+    id: ID! # use uuid
+    name: String!
+}
+
+
+type Query {
+    fetchSample(fetchSampleInput: FetchSampleInput): [Sample!]
+    getSample(sampleInput: SampleInput): [Sample!]
+}
+
+type Mutation {
+    createSample(sampleInput: SampleInput): [Sample!]
+}
+
+
+

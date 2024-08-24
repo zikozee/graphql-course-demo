@@ -1,4 +1,4 @@
-package com.zee.grapqlcourse.config;
+package com.zee.graphqlcourse.config;
 
 import graphql.scalars.ExtendedScalars;
 import org.springframework.context.annotation.Bean;

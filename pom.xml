@@ -99,6 +99,7 @@
 
     <build>
         <plugins>
+            <!--FROM start.spring.io ::GraphQL DGS Code Generation  -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -110,6 +111,56 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.github.deweyjose</groupId>
+                <artifactId>graphqlcodegen-maven-plugin</artifactId>
+                <version>1.50</version>
+                <executions>
+                    <execution>
+                        <id>dgs-codegen</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaPaths>
+                                <param>src/main/resources/graphql</param>
+                            </schemaPaths>
+                            <packageName>com.zee.graphqlcourse.codegen</packageName>
+                            <addGeneratedAnnotation>true</addGeneratedAnnotation>
+                            <typeMapping>
+                                <NegativeInt>java.lang.Integer</NegativeInt>
+                                <NonNegativeInt>java.lang.Integer</NonNegativeInt>
+                                <NonNegativeFloat>java.lang.Double</NonNegativeFloat>
+                                <NonPositiveFloat>java.lang.Double</NonPositiveFloat>
+                                <PositiveFloat>java.lang.Double</PositiveFloat>
+                                <PositiveInt>java.lang.Integer</PositiveInt>
+                                <Long>java.lang.Long</Long>
+                                <BigDecimal>java.math.BigDecimal</BigDecimal>
+                                <Date>java.time.LocalDate</Date>
+                                <DateTime>java.time.LocalDateTime</DateTime>
+                            </typeMapping>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-dgs-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

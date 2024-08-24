@@ -17,14 +17,14 @@ type Sample {
 }
 
 interface Animal{
-    legs: Int
-    hasFeather: Boolean
+    legs: Int!
+    hasFeather: Boolean!
     color: Color!
 }
 
 type Dog implements Animal {
-    legs: Int,
-    hasFeather: Boolean
+    legs: Int!,
+    hasFeather: Boolean!
     color: Color!
     isBark: Boolean
 }

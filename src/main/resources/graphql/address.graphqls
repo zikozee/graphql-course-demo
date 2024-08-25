@@ -1,0 +1,7 @@
+type Address {
+    entityId: String!
+    street : String!
+    city: String!
+    state: String!
+    zipCode: PositiveInt!
+}

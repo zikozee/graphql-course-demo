@@ -1,0 +1,11 @@
+type Company {
+    name: String!,
+    rcNumber: String!,
+    headOffice: String!,
+    country: String!
+}
+
+
+enum BusinessType {
+    TELECOMS, BANKING, EDUCATION
+}

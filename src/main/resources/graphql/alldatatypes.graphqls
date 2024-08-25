@@ -56,14 +56,14 @@ enum RoarIntensity {
 union DogDuck = Dog | Duck | Lion
 
 
-type Address {
+type AddressSample {
     street: String!,
     city: String!,
     country: String!,
     zipCode: Int!
 }
 
-input AddressInput {
+input AddressSampleInput {
     street: String!,
     city: String!,
     country: String!,
@@ -80,7 +80,7 @@ input SampleInput {
     money: BigDecimal
     noOfPencils: NonNegativeInt
     currency: Currency
-    address: [AddressInput!] # Address input is mandatory but not it could be one or more
+    address: [AddressSampleInput!] # Address input is mandatory but not it could be one or more
 }
 
 input FetchSampleInput {

@@ -1,0 +1,23 @@
+type Employee implements Person {
+    name: String!
+    dateOfBirth: Date!
+    gender: Gender!
+    salary: BigDecimal!
+    address: [Address!]
+    age: PositiveInt!
+    phone: PositiveInt
+
+    employeeId: String!
+    departmentNo: PositiveInt!,
+    email: String!
+    role: Role
+}
+
+
+enum Gender {
+    MALE, FEMALE
+}
+
+enum Role {
+    INTERN, SUPERVISOR, MANAGER, GMD
+}

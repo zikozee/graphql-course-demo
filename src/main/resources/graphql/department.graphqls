@@ -1,0 +1,13 @@
+type Department {
+    name: String!,
+    departmentNo: String!,
+    companyName: String!,
+    rcNumber: String!,
+    address: Address!,
+    division: Division!
+}
+
+
+enum Division {
+    HR, SALES, TECH, CUSTOMER_SERVICE
+}

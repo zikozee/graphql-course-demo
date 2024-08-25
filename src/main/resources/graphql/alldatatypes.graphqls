@@ -94,8 +94,17 @@ type Query {
     getSample(sampleInput: SampleInput): [Sample!]
 }
 
+
 type Mutation {
     createSample(sampleInput: SampleInput): [Sample!]
+}
+
+# todo remember to explain Query, Mutation, Subscription are not unique names. Instead they are just simple classes
+# and we can only have one Query, Mutation and Subscription hence we group them together
+
+# this is to be usd to emit data, with a websocket or webflux or reactive
+type Subscription {
+    createSampleNotification: Sample!
 }
 
 

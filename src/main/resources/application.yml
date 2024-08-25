@@ -1,1 +1,3 @@
-spring.application.name=grapql-course-demo
+spring:
+  application:
+    name: graphql-course-demo

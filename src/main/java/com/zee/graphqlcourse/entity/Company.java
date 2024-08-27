@@ -1,5 +1,6 @@
 package com.zee.graphqlcourse.entity;
 
+import com.zee.graphqlcourse.codegen.types.BusinessType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,5 +32,6 @@ public class Company {
     private String headOffice;
     @Column(length = 56, nullable = false)
     private String country;
+    private BusinessType businessType;
 
 }

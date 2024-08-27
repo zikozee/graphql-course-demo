@@ -7,6 +7,7 @@ type Employee implements Person {
     address: [Address!]
     age: PositiveInt!
     phone: PositiveInt
+    companyName: String!
 
     employeeId: String!
     departmentNo: PositiveInt!,

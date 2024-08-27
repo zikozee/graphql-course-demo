@@ -7,4 +7,5 @@ interface Person {
     address: [Address!]
     age: PositiveInt!
     phone: PositiveInt
+    companyName: String!
 }

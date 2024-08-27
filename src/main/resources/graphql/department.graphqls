@@ -1,4 +1,5 @@
 type Department {
+    uuid: String!
     name: String!,
     departmentNo: String!,
     companyName: String!,
@@ -10,4 +11,14 @@ type Department {
 
 enum Division {
     HR, SALES, TECH, CUSTOMER_SERVICE
+}
+
+
+input DepartmentInput {
+    name: String!,
+    departmentNo: String!,
+    companyName: String!,
+    rcNumber: String!,
+    address: AddressInput!,
+    division: Division!
 }

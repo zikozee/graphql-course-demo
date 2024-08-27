@@ -1,4 +1,14 @@
 type Address {
+    uuid: String!
+    entityId: String!
+    street : String!
+    city: String!
+    state: String!
+    zipCode: PositiveInt!
+}
+
+
+input AddressInput {
     entityId: String!
     street : String!
     city: String!

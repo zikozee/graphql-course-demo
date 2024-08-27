@@ -1,4 +1,5 @@
 interface Person {
+    uuid: String!
     name: String!
     dateOfBirth: Date!
     gender: Gender!

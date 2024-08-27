@@ -1,4 +1,5 @@
 type Employee implements Person {
+    uuid: String!
     name: String!
     dateOfBirth: Date!
     gender: Gender!
@@ -20,4 +21,20 @@ enum Gender {
 
 enum Role {
     INTERN, SUPERVISOR, MANAGER, GMD
+}
+
+input EmployeeInput {
+
+    name: String!
+    dateOfBirth: Date!
+    gender: Gender!
+    salary: BigDecimal!
+    address: [AddressInput!]
+    age: PositiveInt!
+    phone: PositiveInt
+
+    employeeId: String!
+    departmentNo: PositiveInt!,
+    email: String!
+    role: Role
 }

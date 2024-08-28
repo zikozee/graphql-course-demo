@@ -88,14 +88,14 @@ input FetchSampleInput {
     name: String!
 }
 
-
-type Query {
+# name changed from Query to QuerySample so it doesn't conflict
+type QuerySample {
     fetchSample(fetchSampleInput: FetchSampleInput): [Sample!]
     getSample(sampleInput: SampleInput): [Sample!]
 }
 
-
-type Mutation {
+# name changed from Mutation to MutationSample so it doesn't conflict
+type MutationSample {
     createSample(sampleInput: SampleInput): [Sample!]
 }
 

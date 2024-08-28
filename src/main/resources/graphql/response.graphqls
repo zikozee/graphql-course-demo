@@ -1,0 +1,10 @@
+interface Response {
+    success: Boolean!,
+    message: String
+}
+
+union EmployeeSearch = Employee | Outsourced
+
+
+
+

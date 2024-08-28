@@ -18,3 +18,9 @@ input CompanyInput {
     headOffice: String!,
     country: String!
 }
+
+type AllCompanyResponse implements Response{
+    success: Boolean!,
+    message: String,
+    companies: [Company!]
+}

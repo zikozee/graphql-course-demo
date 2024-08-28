@@ -1,0 +1,6 @@
+type Query {
+    fetchAllCompany: AllCompanyResponse!
+    fetchDepartmentsByCompanyName(companyName: String!): DepartmentsResponse!
+
+    employeeSearch(outsourced: Boolean): [EmployeeSearch]
+}

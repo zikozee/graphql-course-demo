@@ -8,6 +8,7 @@ type Outsourced implements Person {
     age: PositiveInt!
     phone: PositiveInt
     companyName: String!
+    active: Boolean!
 
     outsourceId: String!,
     duty: Duty!

@@ -5,6 +5,12 @@ interface Response {
 
 union EmployeeSearch = Employee | Outsourced
 
+type CreationResponse implements Response{
+    success: Boolean!,
+    message: String,
+    uuid: String!
+}
+
 
 
 

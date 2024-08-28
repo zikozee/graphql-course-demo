@@ -35,6 +35,7 @@ public class Employee {
     private int age;
     private String phone;
     private String companyName;
+    private boolean active = true;
 
     private String employeeId;
     private String departmentNo;

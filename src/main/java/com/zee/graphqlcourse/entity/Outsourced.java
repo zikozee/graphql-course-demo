@@ -35,6 +35,7 @@ public class Outsourced {
     private int age;
     private String phone;
     private String companyName;
+    private boolean active = true;
 
     private String outsourceId;
     @Column(length = 11, nullable = false)

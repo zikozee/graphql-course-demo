@@ -3,4 +3,6 @@ type Query {
     fetchDepartmentsByCompanyName(companyName: String!): DepartmentsResponse!
 
     employeeSearch(outsourced: Boolean): [EmployeeSearch]
+
+    employeeSearchByStaffId(staffId: String!): EmployeeSearch
 }

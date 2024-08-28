@@ -8,6 +8,7 @@ type Employee implements Person {
     age: PositiveInt!
     phone: PositiveInt
     companyName: String!
+    active: Boolean!
 
     employeeId: String!
     departmentNo: PositiveInt!,
@@ -37,5 +38,12 @@ input EmployeeInput {
     employeeId: String!
     departmentNo: PositiveInt!,
     email: String!
+    role: Role
+}
+
+input EmployeeUpdateInput {
+    employeeId: String!,
+    salary: BigDecimal!,
+    age: PositiveInt!
     role: Role
 }

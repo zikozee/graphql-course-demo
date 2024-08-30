@@ -1,4 +1,4 @@
-type Address {
+type AddressDto {
     uuid: String!
     entityId: String!
     street : String!

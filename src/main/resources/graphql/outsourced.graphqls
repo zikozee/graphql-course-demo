@@ -1,12 +1,12 @@
-type Outsourced implements Person {
+type OutsourcedDto implements Person {
     uuid: String!
     name: String!
     dateOfBirth: Date!
     gender: Gender!
     salary: BigDecimal!
-    address: [Address!]
+    address: [AddressDto!]
     age: PositiveInt!
-    phone: PositiveInt
+    phone: String!
     companyName: String!
     active: Boolean!
 

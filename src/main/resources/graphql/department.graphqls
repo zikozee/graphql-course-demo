@@ -1,10 +1,10 @@
-type Department {
+type DepartmentDto {
     uuid: String!
     name: String!,
     departmentNo: String!,
     companyName: String!,
     rcNumber: String!,
-    address: Address!,
+    address: AddressDto!,
     division: Division!
 }
 
@@ -26,5 +26,5 @@ input DepartmentInput {
 type DepartmentsResponse implements Response {
     success: Boolean!,
     message: String
-    departments: [Department!]
+    departments: [DepartmentDto!]
 }

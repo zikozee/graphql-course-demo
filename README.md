@@ -4,3 +4,12 @@
 ## Input
 - Input cannot have type in them
   - hence create the Input version for the subTypes (i.e type used as field)
+# graphiql  -- enable 
+```yaml
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+```
+  - ensure no trailing slash
+

@@ -1,9 +1,10 @@
-type Company {
+type CompanyDto {
     uuid: String!
     name: String!,
     rcNumber: String!,
     headOffice: String!,
     country: String!
+    businessType: BusinessType!
 }
 
 
@@ -17,10 +18,11 @@ input CompanyInput {
     rcNumber: String!,
     headOffice: String!,
     country: String!
+    businessType: BusinessType!
 }
 
 type AllCompanyResponse implements Response{
     success: Boolean!,
     message: String,
-    companies: [Company!]
+    companies: [CompanyDto!]
 }

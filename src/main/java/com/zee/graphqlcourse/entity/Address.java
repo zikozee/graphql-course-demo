@@ -15,7 +15,8 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "address", indexes = {
-        @Index(name = "ent_id_idx", columnList = "entity_id")
+        @Index(name = "ent_id_idx", columnList = "entity_id"),
+        @Index(name = "ent_id_street", columnList = "entity_id, street", unique = true)
 })
 public class Address {
 
@@ -26,5 +27,5 @@ public class Address {
     private String street;
     private String city;
     private String state;
-    private String zipCode;
+    private int zipCode;
 }

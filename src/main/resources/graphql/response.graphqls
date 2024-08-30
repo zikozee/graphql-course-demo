@@ -3,7 +3,7 @@ interface Response {
     message: String
 }
 
-union EmployeeSearch = Employee | Outsourced
+union EmployeeSearch = EmployeeDto | OutsourcedDto
 
 type CreationResponse implements Response{
     success: Boolean!,

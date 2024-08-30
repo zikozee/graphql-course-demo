@@ -6,10 +6,10 @@ input EmployeeOutsourcedInput {
     salary: BigDecimal!
     address: [AddressInput!]
     age: PositiveInt!
-    phone: PositiveInt
+    phone: String!
 
     employeeId: String
-    departmentNo: PositiveInt,
+    departmentNo: String,
     email: String
     role: Role
 

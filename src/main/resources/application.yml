@@ -1,3 +1,11 @@
 spring:
   application:
     name: graphql-course-demo
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  graphql:
+    graphiql:
+      enabled: true

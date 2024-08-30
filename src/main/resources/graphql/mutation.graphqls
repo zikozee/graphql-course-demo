@@ -1,5 +1,5 @@
 type Mutation {
-    createCompany(companyInput: CompanyInput): CreationResponse!
+    createCompany(companyInput: CompanyInput!): CreationResponse!
     createDepartment(departmentInput: DepartmentInput!): CreationResponse!
 
     createEmployee(employeeOutsourced: EmployeeOutsourcedInput): CreationResponse!

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +106,9 @@ public class EmployeeOutsourcedService {
 
         AddressDto addressDto = mapperUtil.mapToDto(input);
 
-        Address persistedAddress = addressRepository.save(mapperUtil.mapToEntity(addressDto));
+        Address newAddress = mapperUtil.mapToEntity(addressDto);
+        newAddress.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        Address persistedAddress = addressRepository.save(newAddress);
 
         return CreationResponse.newBuilder()
                 .uuid(persistedAddress.getUuid().toString())
@@ -123,6 +126,7 @@ public class EmployeeOutsourcedService {
         employee.setSalary(input.getSalary());
         employee.setAge(input.getAge());
         employee.setRole(input.getRole());
+        employee.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         Employee updatedEmployee = employeeRepository.save(employee);
 
         return CreationResponse.newBuilder()

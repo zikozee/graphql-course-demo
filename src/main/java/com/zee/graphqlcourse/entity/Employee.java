@@ -5,8 +5,11 @@ import com.zee.graphqlcourse.codegen.types.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -42,6 +45,9 @@ public class Employee {
     private String email;
     @Column(length = 10, nullable = false)
     private Role role;
-
+    @CreatedDate
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+    @LastModifiedDate
+    private Timestamp updatedAt;
 
 }

@@ -5,8 +5,11 @@ import com.zee.graphqlcourse.codegen.types.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -40,6 +43,9 @@ public class Outsourced {
     private String outsourceId;
     @Column(length = 11, nullable = false)
     private Duty duty;
-
+    @CreatedDate
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+    @LastModifiedDate
+    private Timestamp updatedAt;
 
 }

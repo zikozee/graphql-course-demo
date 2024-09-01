@@ -3,7 +3,10 @@ package com.zee.graphqlcourse.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -28,4 +31,8 @@ public class Address {
     private String city;
     private String state;
     private int zipCode;
+    @CreatedDate
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+    @LastModifiedDate
+    private Timestamp updatedAt;
 }

@@ -4,7 +4,10 @@ import com.zee.graphqlcourse.codegen.types.Division;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -32,5 +35,9 @@ public class Department {
     private String rcNumber;
     @Column(length = 20, nullable = false)
     private Division division;
+    @CreatedDate
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+    @LastModifiedDate
+    private Timestamp updatedAt;
 
 }

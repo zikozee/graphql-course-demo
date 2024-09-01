@@ -4,6 +4,9 @@ import com.zee.graphqlcourse.codegen.types.*;
 import com.zee.graphqlcourse.entity.*;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  * @author : Ezekiel Eromosei
  * @code @created : 29 Aug, 2024

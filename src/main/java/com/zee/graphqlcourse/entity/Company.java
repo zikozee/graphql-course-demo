@@ -4,7 +4,10 @@ import com.zee.graphqlcourse.codegen.types.BusinessType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -33,5 +36,8 @@ public class Company {
     @Column(length = 56, nullable = false)
     private String country;
     private BusinessType businessType;
-
+    @CreatedDate
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+    @LastModifiedDate
+    private Timestamp updatedAt;
 }

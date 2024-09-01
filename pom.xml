@@ -75,6 +75,11 @@
             <artifactId>graphql-java-extended-scalars</artifactId>
             <version>22.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>2.2.2</version>
+        </dependency>
 
         <!-- EXTERNAL DEPENDENCIES END -->
 
@@ -93,6 +98,7 @@
             <artifactId>spring-graphql-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
 
     </dependencies>

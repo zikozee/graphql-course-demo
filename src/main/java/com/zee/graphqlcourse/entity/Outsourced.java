@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "outsourced", indexes = {
-        @Index(name = "comp_emp_id_dept_no", columnList = "company_name, outsource_id", unique = true)
+        @Index(name = "out_emp_id_dept_no", columnList = "company_name, outsource_id", unique = true)
 })
 public class Outsourced {
 

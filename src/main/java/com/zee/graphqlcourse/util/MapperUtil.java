@@ -113,6 +113,7 @@ public class MapperUtil {
         employeeDto.setSalary(employeeOutsourcedInput.getSalary());
         employeeDto.setAge(employeeOutsourcedInput.getAge());
         employeeDto.setPhone(employeeOutsourcedInput.getPhone());
+        employeeDto.setCompanyName(employeeOutsourcedInput.getCompanyName());
 
         employeeDto.setEmployeeId(employeeOutsourcedInput.getEmployeeId());
         employeeDto.setDepartmentNo(employeeOutsourcedInput.getDepartmentNo());
@@ -132,6 +133,7 @@ public class MapperUtil {
         outsourcedDto.setSalary(employeeOutsourcedInput.getSalary());
         outsourcedDto.setAge(employeeOutsourcedInput.getAge());
         outsourcedDto.setPhone(employeeOutsourcedInput.getPhone());
+        outsourcedDto.setCompanyName(employeeOutsourcedInput.getCompanyName());
 
         outsourcedDto.setOutsourceId(employeeOutsourcedInput.getOutsourceId());
         outsourcedDto.setDuty(employeeOutsourcedInput.getDuty());
@@ -148,6 +150,7 @@ public class MapperUtil {
         employee.setSalary(employeeDto.getSalary());
         employee.setAge(employeeDto.getAge());
         employee.setPhone(employeeDto.getPhone());
+        employee.setCompanyName(employeeDto.getCompanyName());
 
         employee.setEmployeeId(employeeDto.getEmployeeId());
         employee.setDepartmentNo(employeeDto.getDepartmentNo());
@@ -167,6 +170,7 @@ public class MapperUtil {
         employeeDto.setSalary(employee.getSalary());
         employeeDto.setAge(employee.getAge());
         employeeDto.setPhone(employee.getPhone());
+        employeeDto.setCompanyName(employee.getCompanyName());
 
         employeeDto.setEmployeeId(employee.getEmployeeId());
         employeeDto.setDepartmentNo(employee.getDepartmentNo());
@@ -185,6 +189,7 @@ public class MapperUtil {
         outsourced.setSalary(outsourcedDto.getSalary());
         outsourced.setAge(outsourcedDto.getAge());
         outsourced.setPhone(outsourcedDto.getPhone());
+        outsourced.setCompanyName(outsourcedDto.getCompanyName());
 
         outsourced.setOutsourceId(outsourcedDto.getOutsourceId());
         outsourced.setDuty(outsourcedDto.getDuty());
@@ -202,6 +207,7 @@ public class MapperUtil {
         outsourcedDto.setSalary(outsourced.getSalary());
         outsourcedDto.setAge(outsourced.getAge());
         outsourcedDto.setPhone(outsourced.getPhone());
+        outsourcedDto.setCompanyName(outsourced.getCompanyName());
 
         outsourcedDto.setOutsourceId(outsourced.getOutsourceId());
         outsourcedDto.setDuty(outsourced.getDuty());

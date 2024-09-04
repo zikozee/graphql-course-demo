@@ -9,6 +9,7 @@ type AddressDto {
 
 
 input AddressInput {
+    uuid: String
     entityId: String!
     street : String!
     city: String!

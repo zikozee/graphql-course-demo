@@ -4,9 +4,6 @@ import com.zee.graphqlcourse.codegen.types.*;
 import com.zee.graphqlcourse.entity.*;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 /**
  * @author : Ezekiel Eromosei
  * @code @created : 29 Aug, 2024
@@ -18,7 +15,7 @@ public class MapperUtil {
     //todo explain you can use mapstruct or BeanCopy or model mapper, but they majorly use reflection which is expensive
     // they are ok but if you field are not much, write it out manually
 
-    public Company mapToEntity(final CompanyInput companyInput) {
+    public Company mapToCompanyEntity(final CompanyInput companyInput) {
         Company company = new Company();
 
         company.setName(companyInput.getName());
@@ -30,7 +27,7 @@ public class MapperUtil {
         return company;
     }
 
-    public CompanyDto mapToDto(final Company company) {
+    public CompanyDto mapToCompanyDto(final Company company) {
         CompanyDto companyDto = new CompanyDto();
 
         companyDto.setUuid(company.getUuid().toString());
@@ -38,11 +35,12 @@ public class MapperUtil {
         companyDto.setRcNumber(company.getRcNumber());
         companyDto.setHeadOffice(company.getHeadOffice());
         companyDto.setCountry(company.getCountry());
+        companyDto.setBusinessType(company.getBusinessType());
 
         return companyDto;
     }
 
-    public Department mapToEntity(final DepartmentInput departmentInput) {
+    public Department mapToDepartmentEntity(final DepartmentInput departmentInput) {
         Department department = new Department();
 
         department.setName(departmentInput.getName());
@@ -55,7 +53,7 @@ public class MapperUtil {
         return department;
     }
 
-    public DepartmentDto mapToDto(final Department department) {
+    public DepartmentDto mapToDepartmentDto(final Department department) {
         DepartmentDto departmentDto = new DepartmentDto();
 
         departmentDto.setUuid(department.getUuid().toString());
@@ -70,7 +68,7 @@ public class MapperUtil {
     }
 
 
-    public Address mapToEntity(final AddressDto addressDto) {
+    public Address mapToAddressEntity(final AddressDto addressDto) {
         Address address = new Address();
 
         address.setEntityId(addressDto.getEntityId());
@@ -82,7 +80,7 @@ public class MapperUtil {
         return address;
     }
 
-    public AddressDto mapToDto(final AddressInput addressInput) {
+    public AddressDto mapToAddressDto(final AddressInput addressInput) {
         AddressDto addressDto = new AddressDto();
 
         addressDto.setEntityId(addressInput.getEntityId());
@@ -94,7 +92,7 @@ public class MapperUtil {
         return addressDto;
     }
 
-    public AddressDto mapToDto(final Address address) {
+    public AddressDto mapToAddressDto(final Address address) {
         AddressDto addressDto = new AddressDto();
 
         addressDto.setUuid(address.getUuid().toString());
@@ -106,7 +104,7 @@ public class MapperUtil {
         return addressDto;
     }
 
-    public EmployeeDto mapToDto(final EmployeeOutsourcedInput employeeOutsourcedInput) {
+    public EmployeeDto mapToEmployeeDto(final EmployeeOutsourcedInput employeeOutsourcedInput) {
 
         EmployeeDto employeeDto = new EmployeeDto();
 
@@ -144,7 +142,7 @@ public class MapperUtil {
         return outsourcedDto;
     }
 
-    public Employee mapToEntity(final EmployeeDto employeeDto) {
+    public Employee mapToEmployeeEntity(final EmployeeDto employeeDto) {
         Employee employee = new Employee();
 
         employee.setName(employeeDto.getName());
@@ -163,7 +161,7 @@ public class MapperUtil {
         return employee;
     }
 
-    public EmployeeDto mapToDto(final Employee employee) {
+    public EmployeeDto mapToEmployeeDto(final Employee employee) {
         EmployeeDto employeeDto = new EmployeeDto();
 
         employeeDto.setUuid(employee.getUuid().toString());
@@ -183,7 +181,7 @@ public class MapperUtil {
         return employeeDto;
     }
 
-    public Outsourced mapToEntity(final OutsourcedDto outsourcedDto) {
+    public Outsourced mapToOutsourcedEntity(final OutsourcedDto outsourcedDto) {
         Outsourced outsourced = new Outsourced();
 
         outsourced.setName(outsourcedDto.getName());
@@ -200,7 +198,7 @@ public class MapperUtil {
         return outsourced;
     }
 
-    public OutsourcedDto mapToDto(final Outsourced outsourced) {
+    public OutsourcedDto mapToOutsourcedDto(final Outsourced outsourced) {
         OutsourcedDto outsourcedDto = new OutsourcedDto();
 
         outsourcedDto.setUuid(outsourced.getUuid().toString());
@@ -217,5 +215,6 @@ public class MapperUtil {
 
         return outsourcedDto;
     }
+
 
 }

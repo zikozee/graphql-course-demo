@@ -3,6 +3,7 @@ package com.zee.graphqlcourse.api;
 import com.zee.graphqlcourse.codegen.DgsConstants;
 import com.zee.graphqlcourse.codegen.types.CreationResponse;
 import com.zee.graphqlcourse.codegen.types.DepartmentInput;
+import com.zee.graphqlcourse.codegen.types.DepartmentsResponse;
 import com.zee.graphqlcourse.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -26,5 +27,13 @@ public class DepartmentController {
     )
     public CreationResponse createDepartment(@Argument(value = "departmentInput") DepartmentInput input) {
         return departmentService.createDepartment(input);
+    }
+
+    @SchemaMapping(
+            typeName = DgsConstants.QUERY_TYPE,
+            field = DgsConstants.QUERY.FetchDepartmentsByCompanyName
+    )
+    public DepartmentsResponse fetchDepartmentsByCompanyName(@Argument(value = "companyName") String name) {
+        return departmentService.fetchDepartmentsByCompanyName(name);
     }
 }

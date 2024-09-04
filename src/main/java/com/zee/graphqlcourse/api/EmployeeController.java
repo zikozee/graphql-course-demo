@@ -9,6 +9,8 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+
 /**
  * @author : Ezekiel Eromosei
  * @code @created : 29 Aug, 2024
@@ -43,5 +45,22 @@ public class EmployeeController {
     @MutationMapping(value = DgsConstants.MUTATION.UpdateEmployeeDetails)
     public CreationResponse updateEmployeeDetails(@Argument(value = "employeeUpdate") EmployeeUpdateInput input) {
         return employeeOutsourcedService.updateEmployeeDetails(input);
+    }
+
+
+    @SchemaMapping(
+            typeName = DgsConstants.QUERY_TYPE,
+            field = DgsConstants.QUERY.EmployeeSearchByStaffId
+    )
+    public EmployeeSearch employeeSearchByStaffId(@Argument("staffId") String id){
+        return employeeOutsourcedService.employeeSearchByStaffId(id);
+    }
+
+    @SchemaMapping(
+            typeName = DgsConstants.QUERY_TYPE,
+            field = DgsConstants.QUERY.EmployeeSearch
+    )
+    public List<?> employeeSearch(@Argument("outsourced") Boolean outsourced){
+        return employeeOutsourcedService.employeeSearch(outsourced);
     }
 }

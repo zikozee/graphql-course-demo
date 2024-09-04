@@ -4,7 +4,6 @@ import com.zee.graphqlcourse.codegen.types.*;
 import com.zee.graphqlcourse.entity.Address;
 import com.zee.graphqlcourse.entity.Employee;
 import com.zee.graphqlcourse.entity.Outsourced;
-import com.zee.graphqlcourse.repository.AddressRepository;
 import com.zee.graphqlcourse.repository.EmployeeRepository;
 import com.zee.graphqlcourse.repository.OutsourcedRepository;
 import com.zee.graphqlcourse.util.MapperUtil;
@@ -15,6 +14,7 @@ import org.springframework.util.StringUtils;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 /**
@@ -28,7 +28,7 @@ public class EmployeeOutsourcedService {
 
     private final EmployeeRepository employeeRepository;
     private final OutsourcedRepository outsourcedRepository;
-    private final AddressRepository addressRepository;
+    private final AddressService addressService;
     private final MapperUtil mapperUtil;
 
 
@@ -43,19 +43,19 @@ public class EmployeeOutsourcedService {
             throw new RuntimeException("employeeId, departmentNo, email, role is required");
         }
 
-        EmployeeDto employeeDto = mapperUtil.mapToDto(input);
-        Employee persisedEmployee = employeeRepository.save(mapperUtil.mapToEntity(employeeDto));
+        EmployeeDto employeeDto = mapperUtil.mapToEmployeeDto(input);
+        Employee persisedEmployee = employeeRepository.save(mapperUtil.mapToEmployeeEntity(employeeDto));
 
         List<Address> addressList = input.getAddress().stream()
-                .map(mapperUtil::mapToDto)
+                .map(mapperUtil::mapToAddressDto)
                 .map(dto -> {
-                    Address address = mapperUtil.mapToEntity(dto);
+                    Address address = mapperUtil.mapToAddressEntity(dto);
                     address.setEntityId(persisedEmployee.getEmployeeId());
                     return address;
                 })
                 .toList();
 
-        addressRepository.saveAll(addressList);
+        addressService.saveAll(addressList);
 
         return CreationResponse.newBuilder()
                 .uuid(persisedEmployee.getUuid().toString())
@@ -66,18 +66,18 @@ public class EmployeeOutsourcedService {
 
     private CreationResponse createOutsourced(EmployeeOutsourcedInput input) {
         OutsourcedDto outsourcedDto = mapperUtil.mapToOutsourcedDto(input);
-        Outsourced persistedOutsourced = outsourcedRepository.save(mapperUtil.mapToEntity(outsourcedDto));
+        Outsourced persistedOutsourced = outsourcedRepository.save(mapperUtil.mapToOutsourcedEntity(outsourcedDto));
 
         List<Address> addressList = input.getAddress().stream()
-                .map(mapperUtil::mapToDto)
+                .map(mapperUtil::mapToAddressDto)
                 .map(dto -> {
-                    Address address = mapperUtil.mapToEntity(dto);
+                    Address address = mapperUtil.mapToAddressEntity(dto);
                     address.setEntityId(persistedOutsourced.getOutsourceId());
                     return address;
                 })
                 .toList();
 
-        addressRepository.saveAll(addressList);
+        addressService.saveAll(addressList);
 
         return CreationResponse.newBuilder()
                 .uuid(persistedOutsourced.getUuid().toString())
@@ -89,26 +89,29 @@ public class EmployeeOutsourcedService {
 
     public CreationResponse updateExistingEmployeeAddress(AddressInput input) {
 
-        Optional<Address> optionalAddress = addressRepository.findByEntityId(input.getEntityId());
+        Optional<AddressDto> optionalAddressDto = addressService.findAddressByEntityIdAndUuid(input.getEntityId(), UUID.fromString(input.getUuid()));
 
-        Address address = optionalAddress
-                .orElseThrow(() -> new RuntimeException("address for employee with id: '" + input.getEntityId() + "'not found"));
+
+        AddressDto foundAddress = optionalAddressDto.orElseThrow(() -> new RuntimeException("address for employee with id: '" + input.getEntityId() + "'not found"));
 
         //todo assume no input is null for now: we will do validation later
         // change to specification later
-        if(input.getEntityId().trim().equalsIgnoreCase(address.getEntityId())
-                && input.getStreet().trim().equalsIgnoreCase(address.getStreet())
-                && input.getCity().trim().equalsIgnoreCase(address.getCity())
-                && input.getState().trim().equalsIgnoreCase(address.getState())
-                && input.getZipCode() == address.getZipCode()){
+
+        if(input.getEntityId().trim().equalsIgnoreCase(foundAddress.getEntityId())
+                && input.getUuid().trim().equalsIgnoreCase(foundAddress.getUuid())
+                && input.getStreet().trim().equalsIgnoreCase(foundAddress.getStreet())
+                && input.getCity().trim().equalsIgnoreCase(foundAddress.getCity())
+                && input.getState().trim().equalsIgnoreCase(foundAddress.getState())
+                && input.getZipCode() == foundAddress.getZipCode()){
             throw new RuntimeException("address for employee with id: '" + input.getEntityId() +"'already exist");
         }
 
-        AddressDto addressDto = mapperUtil.mapToDto(input);
 
-        Address newAddress = mapperUtil.mapToEntity(addressDto);
+        AddressDto addressDto = mapperUtil.mapToAddressDto(input);
+
+        Address newAddress = mapperUtil.mapToAddressEntity(addressDto);
         newAddress.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        Address persistedAddress = addressRepository.save(newAddress);
+        Address persistedAddress = addressService.save(newAddress);
 
         return CreationResponse.newBuilder()
                 .uuid(persistedAddress.getUuid().toString())
@@ -134,5 +137,45 @@ public class EmployeeOutsourcedService {
                 .success(true)
                 .message("Employee updated successfully")
                 .build();
+    }
+
+    public EmployeeSearch employeeSearchByStaffId(String id) {
+
+        Optional<Employee> optionalEmployee = employeeRepository.findByEmployeeId(id);
+
+        Outsourced outsourced = null;
+        if(optionalEmployee.isEmpty()){
+            outsourced = outsourcedRepository.findByOutsourceId(id)
+                    .orElseThrow(() -> new RuntimeException("employee with id: '" + id + "'not found"));
+        }
+
+
+        if(optionalEmployee.isPresent()){
+            return mapperUtil.mapToEmployeeDto(optionalEmployee.get());
+        }else {
+            return mapperUtil.mapToOutsourcedDto(outsourced);
+        }
+    }
+
+
+    public List<?> employeeSearch(Boolean outsourced) {
+        if(outsourced){
+            return outsourcedRepository.findAll()
+                    .stream()
+                    .map(mapperUtil::mapToOutsourcedDto)
+                    .peek(outsourcedDto -> {
+                        List<AddressDto> address = addressService.findAddressByEntityId(outsourcedDto.getOutsourceId());
+                        outsourcedDto.setAddress(address);
+                    })
+                    .toList();
+        }
+        return employeeRepository.findAll()
+                .stream()
+                .map(mapperUtil::mapToEmployeeDto)
+                .peek(employeeDto -> {
+                    List<AddressDto> address = addressService.findAddressByEntityId(employeeDto.getEmployeeId());
+                    employeeDto.setAddress(address);
+                })
+                .toList();
     }
 }

@@ -4,6 +4,7 @@ import com.zee.graphqlcourse.entity.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,4 +15,6 @@ import java.util.UUID;
 
 public interface DepartmentRepository extends JpaRepository<Department, UUID>
         , JpaSpecificationExecutor<Department> {
+
+    List<Department> findDepartmentByCompanyName(String name);
 }

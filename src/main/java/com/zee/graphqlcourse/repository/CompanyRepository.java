@@ -4,6 +4,7 @@ import com.zee.graphqlcourse.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -14,4 +15,6 @@ import java.util.UUID;
 // todo explain to use only what is needed, CrudRepo... if only CRUD, PagingSorting if only paging and Sorting
 public interface CompanyRepository extends JpaRepository<Company, UUID>
         , JpaSpecificationExecutor<Company> {
+
+    Optional<Company> findByName(String name);
 }

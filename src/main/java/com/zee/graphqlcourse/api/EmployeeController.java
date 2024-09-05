@@ -47,12 +47,13 @@ public class EmployeeController {
         return employeeOutsourcedService.updateEmployeeDetails(input);
     }
 
+    //using __name for common objects .. interface
 
     @SchemaMapping(
             typeName = DgsConstants.QUERY_TYPE,
             field = DgsConstants.QUERY.EmployeeSearchByStaffId
     )
-    public EmployeeSearch employeeSearchByStaffId(@Argument("staffId") String id){
+    public Person employeeSearchByStaffId(@Argument("staffId") String id){
         return employeeOutsourcedService.employeeSearchByStaffId(id);
     }
 
@@ -60,7 +61,7 @@ public class EmployeeController {
             typeName = DgsConstants.QUERY_TYPE,
             field = DgsConstants.QUERY.EmployeeSearch
     )
-    public List<?> employeeSearch(@Argument("outsourced") Boolean outsourced){
+    public List<Person> employeeSearch(@Argument("outsourced") Boolean outsourced){
         return employeeOutsourcedService.employeeSearch(outsourced);
     }
 }

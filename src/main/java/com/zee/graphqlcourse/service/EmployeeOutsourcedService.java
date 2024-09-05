@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -139,7 +140,7 @@ public class EmployeeOutsourcedService {
                 .build();
     }
 
-    public EmployeeSearch employeeSearchByStaffId(String id) {
+    public Person employeeSearchByStaffId(String id) {
 
         Optional<Employee> optionalEmployee = employeeRepository.findByEmployeeId(id);
 
@@ -151,16 +152,21 @@ public class EmployeeOutsourcedService {
 
 
         if(optionalEmployee.isPresent()){
-            return mapperUtil.mapToEmployeeDto(optionalEmployee.get());
+            EmployeeDto employeeDto = mapperUtil.mapToEmployeeDto(optionalEmployee.get());
+            employeeDto.setAddress(addressService.findAddressByEntityId(employeeDto.getEmployeeId()));
+            return employeeDto;
         }else {
-            return mapperUtil.mapToOutsourcedDto(outsourced);
+            OutsourcedDto outsourcedDto = mapperUtil.mapToOutsourcedDto(outsourced);
+            outsourcedDto.setAddress(addressService.findAddressByEntityId(outsourcedDto.getOutsourceId()));
+            return outsourcedDto;
         }
     }
 
 
-    public List<?> employeeSearch(Boolean outsourced) {
+    public List<Person> employeeSearch(Boolean outsourced) {
+        List<Person> personList = new ArrayList<>();
         if(outsourced){
-            return outsourcedRepository.findAll()
+            List<OutsourcedDto> outsourcedDtoList = outsourcedRepository.findAll()
                     .stream()
                     .map(mapperUtil::mapToOutsourcedDto)
                     .peek(outsourcedDto -> {
@@ -168,14 +174,18 @@ public class EmployeeOutsourcedService {
                         outsourcedDto.setAddress(address);
                     })
                     .toList();
+            personList.addAll(outsourcedDtoList);
+        }else {
+            List<EmployeeDto> employeeDtoList = employeeRepository.findAll()
+                    .stream()
+                    .map(mapperUtil::mapToEmployeeDto)
+                    .peek(employeeDto -> {
+                        List<AddressDto> address = addressService.findAddressByEntityId(employeeDto.getEmployeeId());
+                        employeeDto.setAddress(address);
+                    })
+                    .toList();
+            personList.addAll(employeeDtoList);
         }
-        return employeeRepository.findAll()
-                .stream()
-                .map(mapperUtil::mapToEmployeeDto)
-                .peek(employeeDto -> {
-                    List<AddressDto> address = addressService.findAddressByEntityId(employeeDto.getEmployeeId());
-                    employeeDto.setAddress(address);
-                })
-                .toList();
+        return personList;
     }
 }

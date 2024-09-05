@@ -2,7 +2,12 @@ type Query {
     fetchAllCompany: AllCompanyResponse!
     fetchDepartmentsByCompanyName(companyName: String!): DepartmentsResponse!
 
-    employeeSearch(outsourced: Boolean): [EmployeeSearch]
+    # using __name for common objects - interface
+    employeeSearch(outsourced: Boolean): [Person]
 
-    employeeSearchByStaffId(staffId: String!): EmployeeSearch
+    employeeSearchByStaffId(staffId: String!): Person
+
+    # for union - two different entities
+    employeeWithCompanySearch(employeeId: String!): [PersonAndEntitySearch]
+
 }

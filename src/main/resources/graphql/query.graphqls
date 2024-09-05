@@ -10,4 +10,6 @@ type Query {
     # for union - two different entities
     employeeWithCompanySearch(employeeId: String!): [PersonAndEntitySearch]
 
+    fetchEmployeesUsingHeaders: [EmployeeDto]
+    fetchOutsourcedUsingHeaders: [OutsourcedDto]
 }

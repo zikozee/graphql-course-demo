@@ -66,4 +66,15 @@ public class CommonService {
                     return outsourcedDto;
                 }).toList();
     }
+
+    public List<EmployeeDto> fetchEmployeesUsingHeadersAndArgument(String header6, List<String> staffIds) {
+        staffIds.add(header6);
+        return employeeRepository.findAllByEmployeeIdIn(staffIds)
+                .stream()
+                .map(employee -> {
+                    EmployeeDto employeeDto = mapperUtil.mapToEmployeeDto(employee);
+                    employeeDto.setAddress(addressService.findAddressByEntityId(employeeDto.getEmployeeId()));
+                    return employeeDto;
+                }).toList();
+    }
 }

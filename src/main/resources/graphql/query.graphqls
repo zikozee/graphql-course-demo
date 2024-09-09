@@ -12,4 +12,5 @@ type Query {
 
     fetchEmployeesUsingHeaders: [EmployeeDto]
     fetchOutsourcedUsingHeaders: [OutsourcedDto]
+    fetchEmployeesUsingHeadersAndArgument(staffIds: [String!]!): [EmployeeDto]
 }

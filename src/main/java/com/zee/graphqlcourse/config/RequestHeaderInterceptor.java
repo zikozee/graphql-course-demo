@@ -27,6 +27,7 @@ public class RequestHeaderInterceptor implements WebGraphQlInterceptor {
         String header3 = request.getHeaders().getFirst("header3");
         String header4 = request.getHeaders().getFirst("header4");
         String header5 = request.getHeaders().getFirst("header5");
+        String header6 = request.getHeaders().getFirst("header6");
 
         request.configureExecutionInput((executionInput, builder) ->
                         builder.graphQLContext(
@@ -35,7 +36,8 @@ public class RequestHeaderInterceptor implements WebGraphQlInterceptor {
                                         "header2", StringUtils.hasText(header2) ? header2: "",
                                         "header3", StringUtils.hasText(header3) ? header3: "",
                                         "header4", StringUtils.hasText(header4) ? header4: "",
-                                        "header5", StringUtils.hasText(header5) ? header5: ""
+                                        "header5", StringUtils.hasText(header5) ? header5: "",
+                                        "header6", StringUtils.hasText(header6) ? header6: ""
                                 )
                         ).build()
 

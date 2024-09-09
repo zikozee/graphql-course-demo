@@ -58,4 +58,17 @@ public class CommonController {
         // note you can use in combination with any query or mutation
         return commonService.fetchOutsourcedUsingHeaders(header4, header5);
     }
+
+    @SchemaMapping(
+            typeName = DgsConstants.QUERY_TYPE,
+            field = DgsConstants.QUERY.FetchEmployeesUsingHeadersAndArgument
+    )
+    public List<EmployeeDto> fetchEmployeesUsingHeadersAndArgument(
+            @ContextValue(name="header6", required = false) String header6,
+            @Argument List<String> staffIds
+    ){
+
+        // note you can use in combination with any query or mutation
+        return commonService.fetchEmployeesUsingHeadersAndArgument(header6, staffIds);
+    }
 }

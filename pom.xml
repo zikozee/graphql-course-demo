@@ -145,6 +145,7 @@
                                 <BigDecimal>java.math.BigDecimal</BigDecimal>
                                 <Date>java.time.LocalDate</Date>
                                 <DateTime>java.time.LocalDateTime</DateTime>
+                                <EmployeeConnection>graphql.relay.Connection</EmployeeConnection>
                             </typeMapping>
                         </configuration>
                     </execution>

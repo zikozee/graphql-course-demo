@@ -47,3 +47,44 @@ input EmployeeUpdateInput {
     age: PositiveInt!
     role: Role
 }
+
+input EmployeeSearchInput {
+    name: String,
+    dobStart: Date,
+    dobEnd: Date,
+    gender: Gender,
+    salaryFrom: BigDecimal,
+    salaryTo: BigDecimal,
+    ageStart: PositiveInt,
+    ageEnd: PositiveInt,
+    role: Role
+}
+
+
+# added this for pagination else the error below occurs
+#errors=[The field type 'Employee' is not present when resolving type 'EmployeeEdge'
+type Employee @connection{
+    uuid: String!
+    name: String!
+    dateOfBirth: Date!
+    gender: Gender!
+    salary: BigDecimal!
+    age: PositiveInt!
+    phone: String!
+    companyName: String!
+    active: Boolean!
+
+    employeeId: String!
+    departmentNo: String!,
+    email: String!
+    role: Role
+}
+
+
+type EmployeePagination {
+    employeeConnection: EmployeeConnection,
+    page: Int!,
+    size: Int!,
+    totalPage: Int!,
+    totalElement: Long!
+}

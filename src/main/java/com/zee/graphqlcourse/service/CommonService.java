@@ -6,6 +6,7 @@ import com.zee.graphqlcourse.codegen.types.OutsourcedDto;
 import com.zee.graphqlcourse.codegen.types.PersonAndEntitySearch;
 import com.zee.graphqlcourse.entity.Company;
 import com.zee.graphqlcourse.entity.Employee;
+import com.zee.graphqlcourse.exception.ProcessException;
 import com.zee.graphqlcourse.repository.CompanyRepository;
 import com.zee.graphqlcourse.repository.EmployeeRepository;
 import com.zee.graphqlcourse.repository.OutsourcedRepository;
@@ -41,7 +42,7 @@ public class CommonService {
         employeeDto.setAddress(addressService.findAddressByEntityId(employeeDto.getEmployeeId()));
 
         Company foundCompany = companyRepository.findByName(employeeDto.getCompanyName())
-                .orElseThrow(() ->  new RuntimeException("Company not found"));
+                .orElseThrow(() ->  new ProcessException("Company not found"));
         CompanyDto companyDto = mapperUtil.mapToCompanyDto(foundCompany);
 
         return List.of(employeeDto, companyDto);

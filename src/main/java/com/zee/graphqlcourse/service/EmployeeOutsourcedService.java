@@ -4,6 +4,8 @@ import com.zee.graphqlcourse.codegen.types.*;
 import com.zee.graphqlcourse.entity.Address;
 import com.zee.graphqlcourse.entity.Employee;
 import com.zee.graphqlcourse.entity.Outsourced;
+import com.zee.graphqlcourse.exception.NotFoundException;
+import com.zee.graphqlcourse.exception.ProcessException;
 import com.zee.graphqlcourse.repository.EmployeeRepository;
 import com.zee.graphqlcourse.repository.OutsourcedRepository;
 import com.zee.graphqlcourse.search.SpecUtil;
@@ -53,7 +55,7 @@ public class EmployeeOutsourcedService {
     private CreationResponse createEmployee(EmployeeOutsourcedInput input) {
         if(!StringUtils.hasText(input.getEmployeeId()) || !StringUtils.hasText(input.getDepartmentNo())
             || !StringUtils.hasText(input.getEmail()) || input.getRole() == null) {
-            throw new RuntimeException("employeeId, departmentNo, email, role is required");
+            throw new ProcessException("employeeId, departmentNo, email, role is required");
         }
 
         EmployeeDto employeeDto = mapperUtil.mapToEmployeeDto(input);
@@ -105,7 +107,7 @@ public class EmployeeOutsourcedService {
         Optional<AddressDto> optionalAddressDto = addressService.findAddressByEntityIdAndUuid(input.getEntityId(), UUID.fromString(input.getUuid()));
 
 
-        AddressDto foundAddress = optionalAddressDto.orElseThrow(() -> new RuntimeException("address for employee with id: '" + input.getEntityId() + "'not found"));
+        AddressDto foundAddress = optionalAddressDto.orElseThrow(() -> new NotFoundException("address for employee with id: '" + input.getEntityId() + "'not found"));
 
         //todo assume no input is null for now: we will do validation later
         // change to specification later
@@ -116,7 +118,7 @@ public class EmployeeOutsourcedService {
                 && input.getCity().trim().equalsIgnoreCase(foundAddress.getCity())
                 && input.getState().trim().equalsIgnoreCase(foundAddress.getState())
                 && input.getZipCode() == foundAddress.getZipCode()){
-            throw new RuntimeException("address for employee with id: '" + input.getEntityId() +"'already exist");
+            throw new ProcessException("address for employee with id: '" + input.getEntityId() +"'already exist");
         }
 
 
@@ -136,7 +138,7 @@ public class EmployeeOutsourcedService {
     public CreationResponse updateEmployeeDetails(EmployeeUpdateInput input) {
 
         Employee employee = employeeRepository.findByEmployeeId(input.getEmployeeId())
-                .orElseThrow(() -> new RuntimeException("employee with id: '" + input.getEmployeeId() + "'not found"));
+                .orElseThrow(() -> new NotFoundException("employee with id: '" + input.getEmployeeId() + "'not found"));
 
 
         employee.setSalary(input.getSalary());
@@ -159,7 +161,7 @@ public class EmployeeOutsourcedService {
         Outsourced outsourced = null;
         if(optionalEmployee.isEmpty()){
             outsourced = outsourcedRepository.findByOutsourceId(id)
-                    .orElseThrow(() -> new RuntimeException("employee with id: '" + id + "'not found"));
+                    .orElseThrow(() -> new NotFoundException("employee with id: '" + id + "'not found"));
         }
 
 

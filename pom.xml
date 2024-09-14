@@ -80,6 +80,11 @@
             <artifactId>datafaker</artifactId>
             <version>2.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-validation</artifactId>
+            <version>22.0</version>
+        </dependency>
 
         <!-- EXTERNAL DEPENDENCIES END -->
 

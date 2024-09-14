@@ -10,9 +10,9 @@ type AddressDto {
 
 input AddressInput {
     uuid: String
-    entityId: String!
-    street : String!
-    city: String!
-    state: String!
-    zipCode: PositiveInt!
+    entityId: String! @NotBlank(message: "Entity Id is required") @Size(min: 4, max: 64, message: "Entity Id must be between 4 to 10 characters")
+    street : String! @NotBlank(message: "Street Id is required") @Size(min: 5, max: 50, message: "Street must be between 4 to 10 characters")
+    city: String! @NotBlank(message: "City is required") @Size(min: 5, max: 50, message: "City must be between 4 to 10 characters")
+    state: String! @NotBlank(message: "State is required") @Size(min: 5, max: 50, message: "State must be between 4 to 10 characters")
+    zipCode: PositiveInt! # advise students to use Int to be able to use Pattern
 }

@@ -30,21 +30,21 @@ input EmployeeInput {
     name: String!
     dateOfBirth: Date!
     gender: Gender!
-    salary: BigDecimal!
-    address: [AddressInput!]
-    age: PositiveInt!
-    phone: String!
+    salary: BigDecimal! @Digits(integer: 10, fraction: 4, message: "Salary cannot exceed length 10 and max decimal 4")
+    address: [AddressInput!] @NotEmpty(message: "address cannot be empty")
+    age: PositiveInt! # advise students to use Int to be able to use Pattern
+    phone: String! @Pattern(regexp: "^[0-9]{10,17}$", message: "phone must be a number between 10-17 digits")
 
-    employeeId: String!
-    departmentNo: PositiveInt!,
-    email: String!
+    employeeId: String! @NotBlank(message: "Employee Id is required")
+    departmentNo: PositiveInt!, @NotBlank(message: "Department No is required")
+    email: String! @NotBlank(message: "Email is mandatory")
     role: Role
 }
 
 input EmployeeUpdateInput {
-    employeeId: String!,
-    salary: BigDecimal!,
-    age: PositiveInt!
+    employeeId: String!, @NotBlank(message: "Employee Id is required")
+    salary: BigDecimal!,@Digits(integer: 10, fraction: 4, message: "Salary cannot exceed length 10 and max decimal 4")
+    age: PositiveInt!  # advise students to use Int to be able to use Pattern
     role: Role
 }
 

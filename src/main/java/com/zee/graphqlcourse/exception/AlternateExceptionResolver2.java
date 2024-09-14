@@ -24,9 +24,22 @@ public class AlternateExceptionResolver2 extends DataFetcherExceptionResolverAda
                     .path(env.getExecutionStepInfo().getPath())
                     .location(env.getField().getSourceLocation())
                     .build();
-        }else {
-            return null;
+        }else if(ex instanceof AuthenticationException){
+                return GraphQLError.newError()
+                        .message(ex.getLocalizedMessage())
+                        .errorType(ErrorType.BAD_REQUEST)
+                        .path(env.getExecutionStepInfo().getPath())
+                        .location(env.getField().getSourceLocation())
+                        .build();
+
         }
+
+        return  GraphQLError.newError()
+                .message(ex.getLocalizedMessage())
+                .errorType(ErrorType.INTERNAL_ERROR)
+                .path(env.getExecutionStepInfo().getPath())
+                .location(env.getField().getSourceLocation())
+                .build();
     }
 
     @Override // Highest Precedence
@@ -40,8 +53,25 @@ public class AlternateExceptionResolver2 extends DataFetcherExceptionResolverAda
                     .location(env.getField().getSourceLocation())
                     .build()
             );
-        }else {
-            return null;
+        }else if(ex instanceof AuthenticationException){
+            return List.of(
+                    GraphQLError.newError()
+                            .message(ex.getLocalizedMessage())
+                            .errorType(ErrorType.BAD_REQUEST)
+                            .path(env.getExecutionStepInfo().getPath())
+                            .location(env.getField().getSourceLocation())
+                            .build()
+            );
+
         }
+
+        return List.of(
+                GraphQLError.newError()
+                        .message(ex.getLocalizedMessage())
+                        .errorType(ErrorType.INTERNAL_ERROR)
+                        .path(env.getExecutionStepInfo().getPath())
+                        .location(env.getField().getSourceLocation())
+                        .build()
+        );
     }
 }

@@ -9,6 +9,8 @@ import com.zee.graphqlcourse.repository.CompanyRepository;
 import com.zee.graphqlcourse.util.MapperUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Sinks;
 
 import java.util.List;
 
@@ -23,10 +25,13 @@ import java.util.List;
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final MapperUtil mapperUtil;
+    private final Sinks.Many<CompanyDto> companySink = Sinks.many().multicast().onBackpressureBuffer();
 
 
     public CreationResponse createCompany(CompanyInput input) {
         Company persistedCompany = companyRepository.save(mapperUtil.mapToCompanyEntity(input));
+
+        companySink.tryEmitNext(mapperUtil.mapToCompanyDto(persistedCompany));
 
         return CreationResponse.newBuilder()
                 .uuid(persistedCompany.getUuid().toString())
@@ -46,5 +51,10 @@ public class CompanyService {
                 .success(true)
                 .companies(companyDtos)
                 .build();
+    }
+
+
+    public Flux<CompanyDto> companyDtoFlux(){
+        return companySink.asFlux();
     }
 }

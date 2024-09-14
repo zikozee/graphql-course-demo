@@ -10,6 +10,12 @@ spring:
   graphql:
     graphiql:
       enabled: true
+    websocket:
+      path: /subscriptions
+
+  threads:
+    virtual:
+      enabled: true
 
 populate:
   table:

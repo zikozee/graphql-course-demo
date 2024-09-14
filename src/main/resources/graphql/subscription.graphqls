@@ -1,0 +1,4 @@
+type Subscription {
+    createdCompany: CompanyDto!
+    createdEmployee: EmployeeDto!
+}

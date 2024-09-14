@@ -8,6 +8,7 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -63,5 +64,13 @@ public class EmployeeController {
     )
     public List<Person> employeeSearch(@Argument("outsourced") Boolean outsourced){
         return employeeOutsourcedService.employeeSearch(outsourced);
+    }
+
+    @SchemaMapping(
+            typeName = DgsConstants.SUBSCRIPTION_TYPE,
+            field = DgsConstants.SUBSCRIPTION.CreatedEmployee
+    )
+    public Flux<EmployeeDto> createdEmployee(){
+        return employeeOutsourcedService.employeeDtoFlux();
     }
 }

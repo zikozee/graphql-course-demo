@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Sinks;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class EmployeeOutsourcedService {
     private final MapperUtil mapperUtil;
     private final EmployeeSearchQuery employeeSearchQuery;
     private final OutsourcedSearchQuery outsourcedSearchQuery;
+    private final Sinks.Many<EmployeeDto> employeeSink = Sinks.many().multicast().onBackpressureBuffer();
 
 
     public CreationResponse createEmployeeOutsourced(EmployeeOutsourcedInput input) {
@@ -71,6 +74,8 @@ public class EmployeeOutsourcedService {
                 .toList();
 
         addressService.saveAll(addressList);
+
+        employeeSink.tryEmitNext(mapperUtil.mapToEmployeeDto(persisedEmployee));
 
         return CreationResponse.newBuilder()
                 .uuid(persisedEmployee.getUuid().toString())
@@ -250,5 +255,9 @@ public class EmployeeOutsourcedService {
                     .stream().toList();
             return new SimpleListConnection<>(results).get(dataFetchingEnvironment);
         }
+    }
+
+    public Flux<EmployeeDto> employeeDtoFlux(){
+        return employeeSink.asFlux();
     }
 }

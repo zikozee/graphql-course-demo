@@ -2,6 +2,7 @@ package com.zee.graphqlcourse.api;
 
 import com.zee.graphqlcourse.codegen.DgsConstants;
 import com.zee.graphqlcourse.codegen.types.AllCompanyResponse;
+import com.zee.graphqlcourse.codegen.types.CompanyDto;
 import com.zee.graphqlcourse.codegen.types.CompanyInput;
 import com.zee.graphqlcourse.codegen.types.CreationResponse;
 import com.zee.graphqlcourse.service.CompanyService;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
 
 /**
  * @author : Ezekiel Eromosei
@@ -35,5 +37,13 @@ public class CompanyController {
     )
     public AllCompanyResponse fetchAllCompany() {
         return companyService.fetchAllCompany();
+    }
+
+    @SchemaMapping(
+            typeName = DgsConstants.SUBSCRIPTION_TYPE,
+            field = DgsConstants.SUBSCRIPTION.CreatedCompany
+    )
+    public Flux<CompanyDto> createdCompany(){
+        return companyService.companyDtoFlux();
     }
 }

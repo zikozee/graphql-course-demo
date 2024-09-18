@@ -1,0 +1,7 @@
+mutation createDepartmentTest($newDepartment: DepartmentInput!) {
+    createDepartment(departmentInput: $newDepartment) {
+        success
+        message
+        uuid
+    }
+}

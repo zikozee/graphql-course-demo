@@ -30,7 +30,7 @@ public class InstrumentationConfig {
      */
     @Bean
     Instrumentation maxQueryComplexityInstrumentation() {
-        return new MaxQueryComplexityInstrumentation(18);
+        return new MaxQueryComplexityInstrumentation(20);
     }
 
     /**

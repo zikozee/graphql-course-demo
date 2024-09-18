@@ -2,6 +2,11 @@ spring:
   application:
     name: graphql-course-demo
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
   graphql:
     graphiql:
       enabled: true
@@ -12,5 +17,6 @@ spring:
     virtual:
       enabled: true
 
-  profiles:
-    active: test
+populate:
+  table:
+    enabled: false

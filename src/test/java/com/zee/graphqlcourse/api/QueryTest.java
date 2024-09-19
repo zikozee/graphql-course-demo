@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureGraphQlTester;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.test.tester.GraphQlTester;
+import org.springframework.graphql.test.tester.HttpGraphQlTester;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,7 @@ import java.util.Map;
 public class QueryTest {
 
     @Autowired
-    GraphQlTester httpGraphQlTester;
+    HttpGraphQlTester httpGraphQlTester;
 
     @Order(5)
     @DisplayName("fetch Employee and Company")

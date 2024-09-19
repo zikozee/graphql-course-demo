@@ -8,6 +8,7 @@ import com.zee.graphqlcourse.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
  * @code @created : 29 Aug, 2024
  */
 
+@PreAuthorize("hasAnyAuthority('read','create')")
 @Controller
 @RequiredArgsConstructor
 public class DepartmentController {

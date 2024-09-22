@@ -34,17 +34,22 @@ jobs:
           && wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz \
           && tar -xf graalvm-jdk-*_bin.tar.gz \
           && tar -xf apache-maven-3.9.9-bin.tar.gz \
-          && pwd && ls \
           && rm graalvm-*.tar.gz && rm apache-maven-3.9.9-bin.tar.gz \
           && echo 'export JAVA_HOME=graalvm-jdk-22.0.1+8.1' >> ~/.bashrc \
           && echo 'export MAVEN_HOME=apache-maven-3.9.9' >> ~/.bashrc \
-          && echo 'export PATH=/__w/graphql-course-demo/graphql-course-demo/apache-maven-3.9.9/bin:/__w/graphql-course-demo/graphql-course-demo/graalvm-jdk-22.0.1+8.1/bin:$PATH' >> ~/.bashrc \
           && cat ~/.bashrc \
           && source ~/.bashrc \
-          && echo "printing yea" \
+          && echo "$GITHUB_WORKSPACE/apache-maven-3.9.9/bin" >>  $GITHUB_PATH \
+          && echo "$GITHUB_WORKSPACE/graalvm-jdk-22.0.1+8.1/bin" >>  $GITHUB_PATH \
+          && echo "printing yea" && ls \
           && java -version && mvn -version \
+
+      - name: prepare graalm setup and build
+        run: |
+          java -version && mvn -version \
           && apt-get install -y build-essential zlib1g-dev \
           && mvn clean -Pnative native:compile -DskipTests -Dparallel=all -DperCoreThreadCount=true -Duser.timezone=Africa/Lagos -Djava.security.egd=file:/dev/./urandom -Dspring-boot.run.profiles=${{ vars.SPRING_PROFILE }}
+
       - name: list files
         run: ls target/**
 
@@ -72,7 +77,7 @@ jobs:
         run: ls && ls target/**
 
       - name: login
-        uses: docker/login-action@v3
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password:  ${{ secrets.DOCKER_PASSWORD }}

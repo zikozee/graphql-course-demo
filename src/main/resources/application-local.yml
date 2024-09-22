@@ -17,6 +17,9 @@ spring:
     virtual:
       enabled: true
 
+  jwks:
+    uri: http://localhost:8099/oauth2/jwks
+
 populate:
   table:
     enabled: false

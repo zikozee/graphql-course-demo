@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    url: jdbc:postgresql://${HOST}:${PORT}/${DB_NAME}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: ${SHOW_SQL}
+
+  graphql:
+    graphiql:
+      enabled: true
+    websocket:
+      path: /subscriptions
+
+  threads:
+    virtual:
+      enabled: ${ENABLE_VIRTUAL_THREAD}
+
+  jwks:
+    uri: http://${AUTH_HOST}:8099/oauth2/jwks
+
+populate:
+  table:
+    enabled: false

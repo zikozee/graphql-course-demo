@@ -34,3 +34,6 @@ spring:
   }
 ```
 - this represents a slice of book's data
+
+- how to connect from wsl to windows auth server
+-  use windows ipv4 addr

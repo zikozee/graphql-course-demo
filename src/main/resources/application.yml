@@ -14,6 +14,3 @@ spring:
 
   profiles:
     active: test
-
-  jwks:
-    uri: http://localhost:8099/oauth2/jwks

@@ -11,6 +11,3 @@ spring:
   threads:
     virtual:
       enabled: true
-
-  profiles:
-    active: test

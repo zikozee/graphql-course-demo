@@ -34,9 +34,9 @@ jobs:
           && rm graalvm-*.tar.gz && rm apache-maven-3.9.9-bin.tar.gz \
           && echo 'export JAVA_HOME=graalvm-jdk-22.0.1+8.1' >> ~/.bashrc \
           && echo 'export MAVEN_HOME=apache-maven-3.9.9' >> ~/.bashrc \
-#          && echo 'export PATH=apache-maven-3.9.9/bin:graalvm-jdk-22.0.1+8.1/bin:$PATH' >> ~/.bashrc \
           && source ~/.bashrc \
           && cat ~/.bashrc
+
           
 
       - name: prepare for graalvm

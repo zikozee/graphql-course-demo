@@ -27,7 +27,7 @@ jobs:
         run: |
           apt-get update -y &&  apt-get upgrade -y && apt-get install wget -y \
           && wget https://download.oracle.com/graalvm/22/archive/graalvm-jdk-22.0.1_linux-x64_bin.tar.gz \
-          && wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+          && wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz \
           && tar -xf graalvm-jdk-*_bin.tar.gz \
           && tar -xf apache-maven-3.9.9-bin.tar.gz \
           && pwd && ls \

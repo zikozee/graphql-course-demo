@@ -24,6 +24,7 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v4
       - name: Set up JDK GraalVm 22
+        shell: bash
         run: |
           apt-get update -y &&  apt-get upgrade -y && apt-get install wget -y \
           && wget https://download.oracle.com/graalvm/22/archive/graalvm-jdk-22.0.1_linux-x64_bin.tar.gz \
@@ -34,8 +35,8 @@ jobs:
           && rm graalvm-*.tar.gz && rm apache-maven-3.9.9-bin.tar.gz \
           && echo 'export JAVA_HOME=graalvm-jdk-22.0.1+8.1' >> ~/.bashrc \
           && echo 'export MAVEN_HOME=apache-maven-3.9.9' >> ~/.bashrc \
-          && source ~/.bashrc \
           && cat ~/.bashrc
+          && source ~/.bashrc \
 
           
 

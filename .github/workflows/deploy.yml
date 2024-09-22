@@ -25,10 +25,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up JDK GraalVm 22
         run: |
-          apt-get update -y &&  apt-get upgrade -y && apt-get install wget -y
-          && wget https://download.oracle.com/graalvm/22/archive/graalvm-jdk-22.0.1_linux-x64_bin.tar.gz 
-          && tar -vxf graalvm-jdk-*_bin.tar.gz 
-          && ls
+          apt-get update -y &&  apt-get upgrade -y && apt-get install wget -y \
+          && wget https://download.oracle.com/graalvm/22/archive/graalvm-jdk-22.0.1_linux-x64_bin.tar.gz \
+          && tar -vxf graalvm-jdk-*_bin.tar.gz \
+          && ls \
           && rm graalvm-*.tar.gz
           
 

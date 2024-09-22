@@ -23,11 +23,11 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v4
-      - name: Set up JDK GraalVm 22
+      - name: Set up JDK GraalVm 23
         uses: actions/setup-java@v4
         with:
           distribution: graalvm
-          java-version: 22
+          java-version: 23
           cache: 'maven'
 
       - name: prepare for graalvm

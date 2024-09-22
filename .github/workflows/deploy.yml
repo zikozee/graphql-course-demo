@@ -40,6 +40,8 @@ jobs:
           && echo 'export MAVEN_HOME=apache-maven-3.9.9' >> ~/.bashrc \
           && cat ~/.bashrc \
           && source ~/.bashrc \
+          && echo "printing yea" \
+          && java -version
 
           
 

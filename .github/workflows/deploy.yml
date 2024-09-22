@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-job-section:
-    environment: docker
+    environment: action
     runs-on: ubuntu-latest
 
     container: postgres

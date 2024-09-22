@@ -38,7 +38,7 @@ jobs:
           && rm graalvm-*.tar.gz && rm apache-maven-3.9.9-bin.tar.gz \
           && echo 'export JAVA_HOME=graalvm-jdk-22.0.1+8.1' >> ~/.bashrc \
           && echo 'export MAVEN_HOME=apache-maven-3.9.9' >> ~/.bashrc \
-          echo 'export PATH=/__w/graphql-course-demo/graphql-course-demo/apache-maven-3.9.9/bin:/__w/graphql-course-demo/graphql-course-demo/graalvm-jdk-22.0.1+8.1/bin:$PATH' >> ~/.bashrc \
+          && echo 'export PATH=/__w/graphql-course-demo/graphql-course-demo/apache-maven-3.9.9/bin:/__w/graphql-course-demo/graphql-course-demo/graalvm-jdk-22.0.1+8.1/bin:$PATH' >> ~/.bashrc \
           && cat ~/.bashrc \
           && source ~/.bashrc \
           && echo "printing yea" \

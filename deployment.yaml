@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphql
+data:
+  AUTH_HOST: ''
+  SERVER_PORT: "8080"
+  USERNAME: "myuser"
+  PASSWORD: "secret"
+  HOST: ""
+  PORT: "5432"
+  DB_NAME: "graphql_course_demo"
+  DDL_AUTO: "5000"
+  SHOW_SQL: 'true'
+  ACTUATOR_EXPOSED_ENDPOINTS: "health"
+  ENABLE_VIRTUAL_THREAD: 'true'
+  SPRING_PROFILES_ACTIVE: "docker"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: graphql
+  name: graphql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  template:
+    metadata:
+      labels:
+        app: graphql
+    spec:
+      containers:
+        - image: app:1.0
+          name: graphql
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 800m
+              memory: 3Gi
+            requests:
+              cpu: 400m
+              memory: 1Gi
+          envFrom:
+            - configMapRef:
+                name: graphql
+          livenessProbe:
+            initialDelaySeconds: 2
+            periodSeconds: 15
+            failureThreshold: 2
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+          readinessProbe:
+            initialDelaySeconds: 2
+            periodSeconds: 15
+            failureThreshold: 10
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+      dnsPolicy: ClusterFirst
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: graphql
+  name: graphql-service
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 32000
+  type: NodePort
+  selector:
+    app: graphql

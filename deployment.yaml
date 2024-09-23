@@ -10,10 +10,10 @@ data:
   HOST: ""
   PORT: "5432"
   DB_NAME: "graphql_course_demo"
-  DDL_AUTO: "5000"
-  SHOW_SQL: 'true'
+  DDL_AUTO: "none"
+  SHOW_SQL: "true"
   ACTUATOR_EXPOSED_ENDPOINTS: "health"
-  ENABLE_VIRTUAL_THREAD: 'true'
+  ENABLE_VIRTUAL_THREAD: "true"
   SPRING_PROFILES_ACTIVE: "docker"
 
 ---
@@ -39,7 +39,7 @@ spec:
         app: graphql
     spec:
       containers:
-        - image: app:1.0
+        - image: zikozee/gdemo:1.0
           name: graphql
           ports:
             - containerPort: 8080
